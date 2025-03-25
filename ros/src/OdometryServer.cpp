@@ -157,7 +157,7 @@ void OdometryServer::PublishOdometry(const Sophus::SE3d &kiss_pose,
         if (egocentric_estimation) return kiss_pose;
         const auto cloud2base = LookupTransform(base_frame_, cloud_frame_id, tf2_buffer_);
         if (cloud2base) {
-            return cloud2base.value() * kiss_pose * cloud2base.value().inverse();
+            return kiss_pose * cloud2base.value().inverse();
         }
         return {};
     }();
